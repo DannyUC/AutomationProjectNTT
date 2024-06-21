@@ -7,6 +7,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -19,6 +20,7 @@ public class BaseTest {
     public WebDriver driver;
     private ExtentTest extentTest;
     private ScreenshotUtils screenshotUtils;
+
 
     @BeforeClass
     public void setupClass() {
@@ -33,6 +35,7 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
+        ReportManager.getInstance().flush();
     }
 
     @AfterMethod

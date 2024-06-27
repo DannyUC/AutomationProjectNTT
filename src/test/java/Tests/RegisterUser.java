@@ -20,7 +20,6 @@ public class RegisterUser extends BaseTest {
     @Test
     public void registerUser() {
         initTest("Register User");
-        driver.get("http://apptest.go.ro:9999/login");
 
         WebDriverWait waitTime = new WebDriverWait(driver, Duration.ofSeconds(10));
         login = new Login(driver);
@@ -30,14 +29,7 @@ public class RegisterUser extends BaseTest {
 
         Assert.assertTrue(register.getSignUpText().equalsIgnoreCase("Sign Up"));
 
-        register.setFirstName("Daniel");
-        register.setLastName("Ungureanu");
-        register.setPhoneNumber("021731273");
-        register.setEmail("9823769236");
-        register.setPassword("987216981263");
-        register.setCity("Brasov");
-        register.checkTrainer();
-        register.signUp();
+        register.registerUser(true);
 
         waitTime.until(ExpectedConditions.invisibilityOfElementLocated(By.id("submit")));
 

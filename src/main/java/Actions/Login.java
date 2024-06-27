@@ -30,4 +30,8 @@ public class Login {
         elements.loginButton().click();
     }
 
+    public String errorForbiddenAccess(){
+        return elements.errorForbiddenAccess().getText();
+    }
+
 }

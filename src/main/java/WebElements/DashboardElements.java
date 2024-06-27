@@ -15,4 +15,8 @@ public class DashboardElements {
     public WebElement userNameDisplay(){
         return driver.findElement(By.xpath("//a[@class='navigation__link userName']"));
     }
+
+    public WebElement trainingTab(){
+        return driver.findElement(By.xpath("//a[@class='navigation__link trainings']"));
+    }
 }

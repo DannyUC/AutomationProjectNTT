@@ -1,12 +1,14 @@
 package Actions;
 
-import WebElements.LoginElements;
+
 import WebElements.RegisterElements;
 import org.openqa.selenium.WebDriver;
+import utile.ConfigLoader;
 
 public class Register {
 
     private RegisterElements elements;
+    private ConfigLoader configLoader;
 
     public Register(WebDriver driver) {
         this.elements = new RegisterElements(driver);
@@ -53,12 +55,21 @@ public class Register {
     }
 
     public void registerUser(boolean isTrainer) {
-        setFirstName("Daniel");
-        setLastName("Ungureanu");
-        setPhoneNumber("74836");
-        setEmail("hsaiudhsa@sdj.com");
-        setPassword("2342");
-        setCity("Brasov");
+
+        configLoader = new ConfigLoader("src/test/resources/proprietati/dateUser.properties");
+        String firstName = configLoader.getProperty("firstName");
+        String lastName = configLoader.getProperty("lastName");
+        String phoneNumber = configLoader.getProperty("phoneNumber");
+        String email = configLoader.getProperty("email");
+        String password = configLoader.getProperty("password");
+        String city = configLoader.getProperty("city");
+
+        setFirstName(firstName);
+        setLastName(lastName);
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setPassword(password);
+        setCity(city);
         if (isTrainer) {
             checkTrainer();
         } else {

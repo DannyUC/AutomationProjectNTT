@@ -4,10 +4,9 @@ import Actions.Dashboard;
 import Actions.Login;
 import Actions.Register;
 import Actions.Training;
-import WebElements.LoginElements;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -46,17 +45,19 @@ public class TrainingProgram extends BaseTest {
 
         Assert.assertEquals(training.getTrainingTitle(), "Training program");
 
+        training.clickLogoutButton();
+
+        Assert.assertTrue(login.getLoginText().equalsIgnoreCase("Login"));
+
     }
 
     private void login() {
-        WebDriverWait waitTime = new WebDriverWait(driver, Duration.ofSeconds(5));
 
         login.setEmail("hsaiudhsa@sdj.com");
         login.setPassword("2342");
         login.loginButton();
 
         if (driver.getCurrentUrl().contains("apptest.go.ro:9999/login")) {
-            waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#errorForbiddenAccess")));
             if (login.errorForbiddenAccess().equalsIgnoreCase("Access forbidden!")) {
                 login.clickRegisterButton();
                 register.registerUser(true);

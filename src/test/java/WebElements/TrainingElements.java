@@ -15,4 +15,8 @@ public class TrainingElements {
     public WebElement trainingProgramTitle(){
         return driver.findElement(By.xpath("//div[@class='example-container']/h2[contains(text(),'Training program')]"));
     }
+
+    public WebElement logoutButton(){
+        return driver.findElement(By.xpath("//a[@class = 'navigation__link logout']"));
+    }
 }

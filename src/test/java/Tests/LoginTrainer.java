@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utile.BaseTest;
+import utile.ConfigLoader;
 
 import java.time.Duration;
 
@@ -23,14 +24,18 @@ public class LoginTrainer extends BaseTest {
         login = new Login(driver);
         dashboard = new Dashboard(driver);
 
-        login.setEmail("dani@gmail.com");
-        login.setPassword("090909");
+        ConfigLoader configLoader = new ConfigLoader("src/test/resources/proprietati/dateUser.properties");
+        String email = configLoader.getProperty("email");
+        String password = configLoader.getProperty("password");
+
+        login.setEmail(email);
+        login.setPassword(password);
         login.loginButton();
 
         WebDriverWait waitTime = new WebDriverWait(driver, Duration.ofSeconds(10));
         waitTime.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='navigation__link userName']")));
 
-        Assert.assertTrue(dashboard.getUserName().equalsIgnoreCase("dani@gmail.com"));
+        Assert.assertTrue(dashboard.getUserName().equalsIgnoreCase(email));
 
     }
 }
